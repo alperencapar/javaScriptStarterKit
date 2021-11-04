@@ -7,17 +7,24 @@ function findPrime(...numbers){
     let nonPrimeNumbers = []
 
     //!Big O Notation değerinin artmaması için iç içe döngü kullanılmaktan kaçınıldı
-    //? iç içe döngüler kullanılsaydı, şu an O(n) olan değer O(n^2) olacaktı
+    //? 
     for(let i = 0; i<numbers.length; i++){
         if(numbers[i] < 2){
             nonPrimeNumbers.push(numbers[i])
-        }else if(numbers[i] == 2 || numbers[i] == 3 || numbers[i] == 5 || numbers[i] == 7){
+        }else if(numbers[i] == 2 || numbers[i] == 3){
             primeNumbers.push(numbers[i])
-        }else if(numbers[i] % 2 == 0 || numbers[i] % 3 == 0 || numbers[i] % 5 == 0 || numbers[i] % 7 == 0){
-            nonPrimeNumbers.push(numbers[i])
         }else{
-            primeNumbers.push(numbers[i])
+            let number = numbers[i] 
+            for(let x = 2; x <= Math.sqrt(number); x++){
+                if(number % x == 0){
+                    nonPrimeNumbers.push(number)
+                    break;
+                }else if(number % x != 0 && Math.floor(Math.sqrt(number)) == x){
+                    primeNumbers.push(number)
+                }
+            }
         }
+        
     }
     console.log(`Asal Sayılar:\n${ primeNumbers }`)
     console.log(`\n\n\nAsal Olmayan Sayılar:\n${nonPrimeNumbers}`)

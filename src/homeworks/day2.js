@@ -6,7 +6,7 @@ function findPrime(...numbers){
     let primeNumbers = []
     let nonPrimeNumbers = []
 
-    //!Big O Notation değerinin artmaması için iç içe döngü kullanılmaktan kaçınıldı
+    //!Big O Notation değerinin artmaması için iç içe döngü kullanımı kısıtlandı
     //? fonksiyonun O değeri -> O(n * √n) (örn. n = 100 ise 100 * √100 -> 1000)
     //? karekök fonksiyonu kullanılmasaydı -> O(n^2) olacaktı.
     for(let i = 0; i<numbers.length; i++){
@@ -46,7 +46,7 @@ function findPrime(...numbers){
     console.log(`\n\n\nAsal Olmayan Sayılar:\n${nonPrimeNumbers}`)
 }
 
-// findPrime(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46)
+findPrime(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30)
 
 //? 4
 // 1000'e kadarki tüm asal sayıları listeleyen programı yazınız
@@ -62,7 +62,7 @@ function findPrimeTo1000(callback){
     //callback değişkeni içerisine fonksiyon gönderdik ve bu sayede şu anki fonksiyonun içinde, istediğimiz yerde gönderdiğimiz fonksiyonu kullanabiliyoruz
     callback(...nums)   //fonksiyonun içerisine oluşturduğumuz array'i gönderdik.
 }
-// findPrimeTo1000(findPrime)  //fonksiyon çağrısı yaparken değişken olarak findPrime fonksiyonunu gönderdim
+findPrimeTo1000(findPrime)  //fonksiyon çağrısı yaparken değişken olarak findPrime fonksiyonunu gönderdim
 
 
 //! -----------------------
@@ -94,6 +94,7 @@ function numberSum(numbers){
 
 //sayıların arkadaş sayı olup olmadıkları belirleniyor
 function isFriendlyNumber(...numbers){
+    //fonksiyon amicableNumbers olarak adlandırılabilirdi  
     let hash = {}
     for(let i = 0; i < numbers.length; i++){
         let number = numbers[i]
@@ -112,5 +113,46 @@ function isFriendlyNumber(...numbers){
     
 }
 
-console.log(isFriendlyNumber(220,284,17296,18416))
-// console.log(isFriendlyNumber(17296,18416))
+console.log(isFriendlyNumber(220,284))
+console.log(isFriendlyNumber(17296,18416))
+
+
+
+//! -----------------------
+
+
+
+//? 3
+//1000'e kadarki tüm mükemmel sayıları listeleyen programı yazınız
+
+function perfectNumbers(){
+    const numbers = [...Array(1000).keys()] //0 ile 1000 arasındaki sayılardan array oluşturuldu
+    
+    let perfectNumbersArray = []
+
+    //1000 elemanlı array'in içerisinde döngüye girildi
+    numbers.map((number)=>{
+        //döngüdeki elemana number adı verildi
+
+        //number değişkeninin tam bölenleri numDivision adlı değişkene atandı(array olarak)
+        let numDivision = numberDivisor(number)
+        
+        //number değişkenini tam bölenlerin sayısı 2'den fazlaysa:
+        if(numDivision.length > 1){
+            
+            //number'i tam bölenleri topla ve divisionTotal değişkenine aktar
+            let divisionTotal = numberSum(numDivision)
+            
+            //divisionTotal ile number yani şu anki sayı aynı değerdeyse, yani pozitif bölenleri toplamı kendisine eşit ise:
+            if(divisionTotal == number){
+                //bu sayıyı "mükemmel sayılar dizisi" adlı değişkene gönder(mükemmel sayı olduğu kesinleşti)
+                perfectNumbersArray.push(number)
+            }
+        }
+        
+    })
+
+    console.log(...perfectNumbersArray) //mükemmel sayıları kullanıcıya göster
+
+}
+perfectNumbers()

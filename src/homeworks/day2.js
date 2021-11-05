@@ -64,6 +64,15 @@ function findPrimeTo1000(callback){
 }
 // findPrimeTo1000(findPrime)  //fonksiyon çağrısı yaparken değişken olarak findPrime fonksiyonunu gönderdim
 
+
+//! -----------------------
+
+
+//? 2
+//Parametre olarak girilen iki sayının arkadaş sayılar olup olmadığını bulan programı yazınız
+//bölenleri bulma, bölenleri toplama ve arkadaş sayıları tespit etme olarak üç fonksiyona ayrıldı
+
+//gönderilen array'deki sayıların bölenleri bulunuyor
 function numberDivisor(number){
     let numberDivisors = []
     for(let i = 0; i < number; i++){
@@ -75,6 +84,7 @@ function numberDivisor(number){
     return numberDivisors;
 }
 
+//bölenler toplanıyor
 function numberSum(numbers){
     let total = numbers.reduce(((total, amount) =>{
         return total + amount
@@ -82,15 +92,18 @@ function numberSum(numbers){
     return total
 }
 
+//sayıların arkadaş sayı olup olmadıkları belirleniyor
 function isFriendlyNumber(...numbers){
     let hash = {}
     for(let i = 0; i < numbers.length; i++){
         let number = numbers[i]
-        let numDivisons = numberDivisor(number)
-        let total = numberSum(numDivisons)
-        hash[number] = total
+        let numDivisons = numberDivisor(number) //bölenler bulunuyor
+        let total = numberSum(numDivisons)      //bölenler toplanıyor
+        hash[number] = total                    //hash objesine, number anahtarı ile toplam değişkeni atanıyor
 
+        //çıkan sonuçtaki toplam değeri daha önceden bulunduysa:
         if(total in hash){
+            //toplam ve şu an döngü içerisindeki sayıyı gönder
             return [hash[number],number]    //hash[number] -> hash değişkeninin içindeki değer, yani toplam değeri veriyor.
             //tek başına number -> numbers[i]
         }
@@ -99,4 +112,5 @@ function isFriendlyNumber(...numbers){
     
 }
 
-console.log(isFriendlyNumber(110,220,284,17296,365,2554,18416))
+console.log(isFriendlyNumber(220,284,17296,18416))
+// console.log(isFriendlyNumber(17296,18416))

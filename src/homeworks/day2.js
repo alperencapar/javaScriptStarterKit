@@ -62,4 +62,41 @@ function findPrimeTo1000(callback){
     //callback değişkeni içerisine fonksiyon gönderdik ve bu sayede şu anki fonksiyonun içinde, istediğimiz yerde gönderdiğimiz fonksiyonu kullanabiliyoruz
     callback(...nums)   //fonksiyonun içerisine oluşturduğumuz array'i gönderdik.
 }
-findPrimeTo1000(findPrime)  //fonksiyon çağrısı yaparken değişken olarak findPrime fonksiyonunu gönderdim
+// findPrimeTo1000(findPrime)  //fonksiyon çağrısı yaparken değişken olarak findPrime fonksiyonunu gönderdim
+
+function numberDivisor(number){
+    let numberDivisors = []
+    for(let i = 0; i < number; i++){
+        if(number % i == 0){
+            numberDivisors.push(i)
+        }
+    }
+
+    return numberDivisors;
+}
+
+function numberSum(numbers){
+    let total = numbers.reduce(((total, amount) =>{
+        return total + amount
+    }))
+    return total
+}
+
+function isFriendlyNumber(...numbers){
+    let hash = {}
+    for(let i = 0; i < numbers.length; i++){
+        let number = numbers[i]
+        let numDivisons = numberDivisor(number)
+        let total = numberSum(numDivisons)
+        hash[number] = total
+
+        if(total in hash){
+            return [hash[number],number]    //hash[number] -> hash değişkeninin içindeki değer, yani toplam değeri veriyor.
+            //tek başına number -> numbers[i]
+        }
+    }
+
+    
+}
+
+console.log(isFriendlyNumber(110,220,284,17296,365,2554,18416))
